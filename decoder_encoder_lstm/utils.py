@@ -8,7 +8,6 @@ def predict_sequence(encoder_model, decoder_model, input_seq, n_output_tokens, r
   states_value = encoder_model.predict(padded_seq)
 
   target_seq = np.zeros((1, 1, n_output_tokens))
-  # target_seq[0, 0, target_token_index['\t']] = 1.
 
   stop_condition = False
   predict_sequence = ''
@@ -17,7 +16,7 @@ def predict_sequence(encoder_model, decoder_model, input_seq, n_output_tokens, r
 
     sampled_token_index = argmax(output_tokens[0, -1, :])
     sampled_string = reverse_target_token_index[sampled_token_index]
-    predict_sequence += sampled_string
+    predict_sequence += sampled_string + " "
 
     if (sampled_string == '\n' or len(predict_sequence) > max_decoder_seq_length):
       break

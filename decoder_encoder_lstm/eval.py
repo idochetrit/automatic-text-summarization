@@ -5,7 +5,7 @@ from .utils import predict_sequence, one_shot_decode, preprocessing
 
 def evaluate(val_data, train_data, model, encoder_layer, decoder_layer, n_output_tokens):
     rouge = Rouge()
-    input_texts, target_texts, input_sequences, target_sequences = val_data
+    input_texts, target_texts, input_sequences, target_sequences = train_data
     
     train_target_texts, _, train_target_sequences, _ = train_data
     max_decoder_seq_length = max([len(txt) for txt in train_target_texts])
@@ -14,7 +14,7 @@ def evaluate(val_data, train_data, model, encoder_layer, decoder_layer, n_output
         (i, char) for char, i in target_token_index.items()
     )
 
-    X1_test, X2_test, y_test = preprocessing(val_data)
+    X1_test, X2_test, y_test = preprocessing(train_data)
 
    # example runs
     for idx in range(3):
@@ -28,9 +28,11 @@ def evaluate(val_data, train_data, model, encoder_layer, decoder_layer, n_output
             max_decoder_seq_length,
         )
 
-        print("-")
-        print("Input sentence:", "\n".join(input_texts[idx]))
+        print("- -- -")
+        # print("Input sentence:", "\n".join(input_texts[idx]))
+        print("Ground truth sentence:", "\n".join(target_texts[idx]))
         print("Decoded sentence:", predicted)
+        print("- -- -")
     
     # evaluate LSTM
     total = len(X1_test)
