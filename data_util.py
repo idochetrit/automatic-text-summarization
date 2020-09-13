@@ -45,7 +45,7 @@ def clean_lines(lines):
         line = line.split()
         line = [word.lower() for word in line]
         cleaned.append(" ".join(line))
-    cleaned = [c for c in cleaned if len(c) > 0 or ]
+    cleaned = [c for c in cleaned if len(c) > 0]
     return cleaned
 
 
