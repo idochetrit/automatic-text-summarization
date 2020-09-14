@@ -8,8 +8,8 @@ import numpy as np
 
 def main():
     np.random.seed(42)
-    report_dir_path = '../reports'
-    model_dir_path = '../saved_models'
+    report_dir_path = './reports'
+    model_dir_path = './saved_models'
 
     train_data, val_data = data_util.get_datasets()
     input_texts_train, target_texts_train, _, _ = train_data
@@ -19,7 +19,7 @@ def main():
     summarizer = Seq2SeqSummarizer(config)
 
     print('demo size: ', len(input_texts_train))
-    print('testing size: ', len(input_texts_train))
+    print('testing size: ', len(input_texts_val))
 
     print('start fitting ...')
     history = summarizer.fit(input_texts_train, target_texts_train, input_texts_val, target_texts_val, epochs=10)

@@ -8,7 +8,6 @@ Abstractive Summarization is a method, which aims to automatically generate summ
 
 The file ```data_util``` responsible for reorganizing the files into more python like data structures, then in ```utils.py``` we have the preprocessing method that vectorizing and divideing our data into train and val
 
-## Training
 
 First install required dependencies:
 
@@ -16,8 +15,13 @@ First install required dependencies:
 pip install -r requirements.txt
 ```
 
+# EncoderDecoder Model
+
+## Training
+
 The file ```utils``` contains the essential function to perform preprocessing and running the layers to predict a sentence``
 
+to run both train and eval you can use the command:
 ```bash
 python main.py
 ```
@@ -113,21 +117,75 @@ Epoch 25/25
 | Our Implementation | 42.31%  |   3.25% |  37.51% |
 | Random Baseline    | 32.14%  |  11.39% |  22.11% |
 
-## Example Summaries
-
-| Ground Truth Summary | Model Generated Summary |
-| -------------------- | :---------------------: |
-| a                    |            b            |
 
 
----
+# Seq2Seq Model
 
-## Example prediction
+
+## Training
+
+The file ```utils``` contains the essential function to perform preprocessing and running the layers to predict a sentence``
+
+```bash
+python -m seq2seq.train
+```
+
+## Results
+
+To first evaluate sum of the stories using the saved model we can run
+
+```bash
+python -m seq2seq.eval
+```
+
+
+**Ouput model loss**
+
+```bash
+demo size:  350
+testing size:  150
+start fitting ...
+(1361,)
+(583,)
+(12562, 115)
+(5371, 115)
+Epoch 1/10
+196/196 [==============================] - 109s 557ms/step - loss: 0.1562 - accuracy: 0.0023 - val_loss: 0.1111 - val_accuracy: 0.0024
+Epoch 2/10
+196/196 [==============================] - 108s 550ms/step - loss: 0.1409 - accuracy: 0.0027 - val_loss: 0.1084 - val_accuracy: 0.0028
+Epoch 3/10
+196/196 [==============================] - 109s 555ms/step - loss: 0.1397 - accuracy: 0.0028 - val_loss: 0.1079 - val_accuracy: 0.0028
+Epoch 4/10
+196/196 [==============================] - 110s 560ms/step - loss: 0.1389 - accuracy: 0.0028 - val_loss: 0.1076 - val_accuracy: 0.0028
+Epoch 5/10
+196/196 [==============================] - 109s 559ms/step - loss: 0.1383 - accuracy: 0.0028 - val_loss: 0.1075 - val_accuracy: 0.0028
+Epoch 6/10
+196/196 [==============================] - 108s 549ms/step - loss: 0.1379 - accuracy: 0.0028 - val_loss: 0.1074 - val_accuracy: 0.0028
+Epoch 7/10
+196/196 [==============================] - 113s 575ms/step - loss: 0.1374 - accuracy: 0.0028 - val_loss: 0.1074 - val_accuracy: 0.0028
+Epoch 8/10
+196/196 [==============================] - 114s 581ms/step - loss: 0.1370 - accuracy: 0.0028 - val_loss: 0.1073 - val_accuracy: 0.0028
+Epoch 9/10
+196/196 [==============================] - 114s 582ms/step - loss: 0.1365 - accuracy: 0.0028 - val_loss: 0.1072 - val_accuracy: 0.0028
+
+```
+
+![alt text](./reports/Seq2Seq-history.png)
+
+
+# Example Summaries
+
 
 __Original text:__
 
-the duchess of cornwall has spoken of her pride at opening a new cancer support centre in aberdeen today. camilla was without her husband prince charles but was still in royal company as the queen of norway, queen sonja, also attended the opening of the elizabeth montgomerie building, next to the city's royal infirmary hospital. the building is named after golfer colin montgomerie's mother and is a branch of the maggie's cancer care charity which he set up in her memory after she died of cancer in 1991. apt choice: the duchess of cornwall arrives in tartan for the opening of a new maggie's cancer centre in aberdeen royal protocol: the duchess curtseys as she greets the queen of norway similar taste in clothes: the royal pair, both in dresses and blazers, were given a tour of the centre known as the duchess of rothesay in scotland, camilla donned a green roy allen lord of the isles tartan dress and blazer for her visit. while it's usually the duchess of cambridge who is known for her style credentials, camilla's look is on trend with numerous designers featuring tartan and window-pane check in their london fashion week shows recently. camilla teamed her patriotic outfit with beige shoes and a matching handbag and accessorised with a string of pearls round her neck. mother's legacy: golfer colin montgomerie, who set up maggie's cancer support in memory of his late mother helped to show the duchess around warm welcome: the duchess meets children who attended the opening gifts: flowers were given to the two royals by leigh bonthrone, 15, and jemma findlay, eight, whose families have been affected by cancer meanwhile, queen sonja wore a similar outfit of a blazer and dress but opted for less colourful shades of grey and pale blue with stripes instead of checks, accessorised with a chunky silver necklace. camilla curtsied to the queen as they greeted one another before being given a tour of the new building, which they first saw plans for during a previous meeting in oslo. two girls, leigh bonthrone, 15, and jemma findlay, eight, whose families have been affected by cancer presented bouquets to the duchess and queen. proud patron: camilla said she was delighted with what the charity have achieved with the new centre camilla said of the charities support centres: 'these places are the most uplifting places you could ever be, and you come out feeling better' camilla has been president of the cancer charity since 2008 and has visited many of its 17 centres. today she met maggie’s staff, supporters and fundraisers, and unveiled a commemorative stone to mark the event. they also broke a kransekake, a norwegian celebration cake, to mark the opening. addressing guests, camilla, said: 'as a very, very proud patron of maggie’s, i just want to thank everyone here today for everything they have done to make this building so special. 'these places are the most uplifting places you could ever be, and you come out feeling better. 'that is surely the point of maggie’s. you see so many smiling faces and that is what you want if you’re facing this terrible disease.' commemorative: the duchess made a speech as she unveiled a plaque montgomerie and his family members also attended the event. montgomerie said: 'the opening of the centre is a very special day for myself and my family and i want to thank everyone involved in making this dream a reality.' earlier, the duchess and queen sonja spent time talking with leigh, from kirkcaldy, fife, whose father recovered from cancer, and jemma, of aberdeen, who lost her mother to the disease. leigh said: 'the duchess was asking about how maggie’s can support people. i told her how the centres had helped my family and how much one was needed here in aberdeen.'
+Input text:  andy schleck, the 2010 winner, is out of the tour de france following a crash involving a spectator on monday's third stage from cambridge to london.schleck (trek factory racing) announced he would not be starting the 163.5-kilometre fourth stage from le touquet-paris-plage to lille.he wrote on twitter: 'very disappointed to let you know that i will not be able to start.down and out: schleck suffered a heavy fall a le tour headed through epping forest on mondaybad moment: luxembourg's andy schleck has been ruled out of the tour with a ligament injurycollision: a pedestrian taking photos was knocked over during stage 3 
+of the tour de france on mondaymoment of impact: luxembourg's andy schleck collided with the pedestrian but managed to get to his feet'my knee is too damaged from the crash. this is a huge blow for me.'schleck is 
+a shadow of the figure who duelled with alberto contador for the 2010 yellow jersey and inherited the title after the spaniard's win was quashed due to a doping violation.he was riding the tour in support of his brother frank, who is already more than a minute behind race leader vincenzo nibali.trek said schleck would travel to basle, switzerland, for further examination and possible surgery.schleck added in a team statement: 'i went on the rollers as soon as we arrived in le touquet, to get the muscles and tendons warmed up, but the pain is too much.'i believed until that moment that i would start. i think i ignored the pain somehow, hiding it in the back of my head.'i'm hugely disappointed. i was so happy to be here, racing with frank in the tour again.'i'm sad to let the team down, to let frank down. i was ready to help him defend his gc ambitions. i felt i was progressing, everything was coming back.'the crash occurred when, spotting a pedestrian stood virtually in the road, racers were forced to break suddenly and schleck fell from his bike.the 29-year-old managed to get back to his feet and finished the race but will now take no further part in the tour.raring to go: schleck in a training session prior to the start of the tour which he is unable to complete
 
 __Summary generated:__
 
-'as can be seen from the photos the conditions in the store were unacceptable.'as can be seen from the photos the conditions in the store were unacceptable.
+the 2010 winner will not take part from the fourth stage onwards
+
+he said 'my knee is too damaged from the crash' on twitter
+
+schleck was riding in support of his brother and said it was a 'huge blow'

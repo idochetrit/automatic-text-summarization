@@ -7,13 +7,6 @@ def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
                           cmap=plt.cm.Blues):
-    """
-    See full source and example:
-    http://scikit-learn.org/stable/auto_examples/model_selection/plot_confusion_matrix.html
-
-    This function prints and plots the confusion matrix.
-    Normalization can be applied by setting `normalize=True`.
-    """
     plt.imshow(cm, interpolation='nearest', cmap=cmap)
     plt.title(title)
     plt.colorbar()
@@ -83,8 +76,8 @@ def create_history_plot(history, model_name, metrics=None):
     plt.title('Accuracy and Loss (' + model_name + ')')
     if metrics is None:
         metrics = {'acc', 'loss'}
-    if 'acc' in metrics:
-        plt.plot(history.history['acc'], color='g', label='Train Accuracy')
+    if 'accuracy' in metrics:
+        plt.plot(history.history['accuracy'], color='g', label='Train Accuracy')
         plt.plot(history.history['val_acc'], color='b', label='Validation Accuracy')
     if 'loss' in metrics:
         plt.plot(history.history['loss'], color='r', label='Train Loss')
@@ -101,6 +94,6 @@ def plot_history(history, model_name):
 
 def plot_and_save_history(history, model_name, file_path, metrics=None):
     if metrics is None:
-        metrics = {'acc', 'loss'}
+        metrics = {'accuracy', 'loss'}
     create_history_plot(history, model_name, metrics)
     plt.savefig(file_path)

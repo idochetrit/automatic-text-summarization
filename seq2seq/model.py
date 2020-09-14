@@ -5,6 +5,8 @@ from keras.preprocessing.sequence import pad_sequences
 from keras.callbacks import ModelCheckpoint
 import numpy as np
 import os
+from spacy.lang.en.stop_words import STOP_WORDS
+
 
 HIDDEN_UNITS = 100
 DEFAULT_BATCH_SIZE = 64
@@ -63,16 +65,20 @@ class Seq2SeqSummarizer(object):
 
     def transform_input_text(self, texts):
         temp = []
-        for line in texts:
-            x = []
-            for word in line.lower().split(' '):
-                wid = 1
-                if word in self.input_word2idx:
-                    wid = self.input_word2idx[word]
-                x.append(wid)
-                if len(x) >= self.max_input_seq_length:
-                    break
-            temp.append(x)
+        for story in texts:
+            for line in story:
+                x = []
+                for word in line.lower().split(' '):
+                    wid = 1
+                    if word not in STOP_WORDS:
+                        continue
+                    if word in self.input_word2idx:
+                        wid = self.input_word2idx[word]
+
+                    x.append(wid)
+                    if len(x) >= self.max_input_seq_length:
+                        break
+                temp.append(x)
         temp = pad_sequences(temp, maxlen=self.max_input_seq_length)
 
         print(temp.shape)
@@ -80,14 +86,16 @@ class Seq2SeqSummarizer(object):
 
     def transform_target_encoding(self, texts):
         temp = []
-        for line in texts:
-            x = []
-            line2 = 'START ' + line.lower() + ' END'
-            for word in line2.split(' '):
-                x.append(word)
-                if len(x) >= self.max_target_seq_length:
-                    break
-            temp.append(x)
+        for story in texts:
+            for line in story:
+                x = []
+                line2 = 'START ' + line.lower() + ' END'
+                for word in line2.split(' '):
+                    if word not in STOP_WORDS:
+                        x.append(word)
+                    if len(x) >= self.max_target_seq_length:
+                        break
+                temp.append(x)
 
         temp = np.array(temp)
         print(temp.shape)

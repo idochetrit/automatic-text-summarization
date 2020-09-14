@@ -1,2 +1,8 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.so
+.Python
 .DS_Store
 saved_models/
