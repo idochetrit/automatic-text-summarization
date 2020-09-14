@@ -10,6 +10,12 @@ The file ```data_util``` responsible for reorganizing the files into more python
 
 ## Training
 
+First install required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
 The file ```utils``` contains the essential function to perform preprocessing and running the layers to predict a sentence``
 
 ```bash

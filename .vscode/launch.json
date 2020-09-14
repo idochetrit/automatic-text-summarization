@@ -4,6 +4,8 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
+    {"name":"Python: seq2seq.train","type":"python","request":"launch","module":"seq2seq.train"},
+    {"name":"Python: seq2seq.eval","type":"python","request":"launch","module":"seq2seq.eval"},
     {
       "name": "Python: Current File",
       "type": "python",
